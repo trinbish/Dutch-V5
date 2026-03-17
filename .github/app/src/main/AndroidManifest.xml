@@ -1,7 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
  package="com.example.dutchvocab">
-
-```
 <application android:label="Dutch Vocab Trainer">
     <activity android:name=".MainActivity">
         <intent-filter>
@@ -10,6 +8,4 @@
         </intent-filter>
     </activity>
 </application>
-```
-
 </manifest>

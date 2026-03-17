@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:Arial;text-align:center;padding:40px;background:#f2f2f2}
+.card{background:white;padding:30px;border-radius:16px;box-shadow:0 10px 20px rgba(0,0,0,0.15)}
+.word{font-size:28px;margin-bottom:20px}
+button{padding:12px 18px;margin:5px;border:none;border-radius:8px;font-size:16px}
+.show{background:#4CAF50;color:white}
+.next{background:#2196F3;color:white}
+</style>
+</head>
+<body>
+<div class="card">
+<div id="word" class="word">Loading...</div>
+<button class="show" onclick="showAnswer()">Show meaning</button>
+<button class="next" onclick="nextWord()">Next</button>
+</div>
+
+<script>
+let vocab=[];
+let current=0;
+let showing=false;
+
+fetch('vocab.json')
+.then(r=>r.json())
+.then(d=>{vocab=d;shuffle(vocab);showWord();});
+
+function showWord(){
+document.getElementById("word").innerText=vocab[current].dutch;
+showing=false;
+}
+
+function showAnswer(){
+if(!showing){
+document.getElementById("word").innerText=vocab[current].dutch+" — "+vocab[current].english;
+showing=true;
+}
+}
+
+function nextWord(){
+current++;
+if(current>=vocab.length){shuffle(vocab);current=0;}
+showWord();
+}
+
+function shuffle(a){
+for(let i=a.length-1;i>0;i--){
+const j=Math.floor(Math.random()*(i+1));
+[a[i],a[j]]=[a[j],a[i]];
+}
+}
+</script>
+</body>
+</html>
